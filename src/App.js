@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef } from "react";
+import "./App.css";
 
 function App() {
+  const ref = useRef("green");
+
+  useEffect(() => {
+    const curentDiv = ref.current.style;
+    const timerColor = setInterval(() => {
+      curentDiv.background === "green"
+        ? (curentDiv.background = "red")
+        : (curentDiv.background = "green");
+    }, 1000);
+    return () => clearInterval(timerColor);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="block" ref={ref}>
+      <h1>Градиент!</h1>
+      <p>
+        Градие́нт — вектор, своим направлением указывающий направление
+        наибольшего возрастания некоторой скалярной величины \varphi, а по
+        величине равный скорости роста этой величины в этом направлении.
+      </p>
     </div>
   );
 }
